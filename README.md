@@ -1,4 +1,4 @@
-# SkillTrace Core
+# SkillTrace
 
 Compact reference implementation for **SkillTrace: Multi-Trace
 Provenance Auditing for LLM-Agent Skill Reuse**.
