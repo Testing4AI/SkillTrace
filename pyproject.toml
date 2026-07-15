@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "skilltrace-core"
+version = "0.1.0"
+description = "Compact reference implementation of SkillTrace multi-trace provenance auditing for agent skills."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+skilltrace-audit = "skilltrace_core.audit:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
