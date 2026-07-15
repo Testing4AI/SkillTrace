@@ -6,8 +6,7 @@ Provenance Auditing for LLM-Agent Skill Reuse**.
 This artifact contains the core audit logic used to explain the paper method:
 trace extraction, deterministic trace similarity, calibrated MaxFusion,
 repository-level baselines, deterministic attack operators, and a small toy
-example. It intentionally does **not** include benchmark datasets, wild-corpus
-data, generated derivatives, paper result tables, or API keys.
+example. 
 
 ## What Is Included
 
