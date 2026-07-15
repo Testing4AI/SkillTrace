@@ -1,6 +1,6 @@
 # SkillTrace Core
 
-Compact reviewer-facing reference implementation for **SkillTrace: Multi-Trace
+Compact reference implementation for **SkillTrace: Multi-Trace
 Provenance Auditing for LLM-Agent Skill Reuse**.
 
 This artifact contains the core audit logic used to explain the paper method:
