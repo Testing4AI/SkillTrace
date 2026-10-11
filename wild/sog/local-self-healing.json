@@ -1,0 +1,356 @@
+{
+  "schema": "skilltrace.wild-sog-excerpt.v1",
+  "extraction": {
+    "kind": "source-grounded editorial annotation",
+    "scope": "selected local operations, not full graphs",
+    "independent_provider_extraction": false,
+    "full_operational_score": null
+  },
+  "source_files": {
+    "SKILL.md": {
+      "sha256": "0912449f15730f2e806743a3c96a8704be56aa3c98b8ea147fad6ec6a4c906b4"
+    },
+    "src/gep/solidify.js": {
+      "sha256": "157b54514c5ca1b013ccab7019e46d6ce6e2bbee8bcc86b9b5ca0b840c1cd899"
+    }
+  },
+  "graph": {
+    "blocks": [
+      {
+        "id": "b1",
+        "action": "check",
+        "object_role": "change_constraints",
+        "tool_role": "constraint_checker",
+        "inputs": [
+          "gene",
+          "change_extent",
+          "repository"
+        ],
+        "outputs": [
+          "constraint_result"
+        ],
+        "evidence": {
+          "file": "src/gep/solidify.js",
+          "quote": "const constraintCheck = checkConstraints({ gene: geneUsed, blast, blastRadiusEstimate, repoRoot });",
+          "line_start": 1040,
+          "line_end": 1040
+        }
+      },
+      {
+        "id": "b2",
+        "action": "validate",
+        "object_role": "candidate_change",
+        "tool_role": "validation_runner",
+        "inputs": [
+          "gene",
+          "repository"
+        ],
+        "outputs": [
+          "validation_result"
+        ],
+        "evidence": {
+          "file": "src/gep/solidify.js",
+          "quote": "validation = runValidations(geneUsed, { repoRoot, timeoutMs: 180000 });",
+          "line_start": 1080,
+          "line_end": 1080
+        }
+      },
+      {
+        "id": "b3",
+        "action": "check",
+        "object_role": "entry_point",
+        "tool_role": "isolated_process",
+        "inputs": [
+          "repository"
+        ],
+        "outputs": [
+          "canary_result"
+        ],
+        "evidence": {
+          "file": "src/gep/solidify.js",
+          "quote": "const canary = runCanaryCheck({ repoRoot, timeoutMs: 30000 });",
+          "line_start": 1085,
+          "line_end": 1085
+        }
+      },
+      {
+        "id": "b4",
+        "action": "decide",
+        "object_role": "change_outcome",
+        "tool_role": "none",
+        "inputs": [
+          "constraint_result",
+          "validation_result",
+          "protocol_violations"
+        ],
+        "outputs": [
+          "outcome"
+        ],
+        "evidence": {
+          "file": "src/gep/solidify.js",
+          "quote": "const success = constraintCheck.ok && validation.ok && protocolViolations.length === 0;",
+          "line_start": 1127,
+          "line_end": 1127
+        }
+      },
+      {
+        "id": "b5",
+        "action": "capture",
+        "object_role": "failed_change",
+        "tool_role": "version_control",
+        "inputs": [
+          "repository"
+        ],
+        "outputs": [
+          "diff_snapshot"
+        ],
+        "evidence": {
+          "file": "src/gep/solidify.js",
+          "quote": "// Capture failed mutation as a FailedCapsule before rollback destroys the diff.\n  if (!dryRun && !success) {\n    try {\n      var diffSnapshot = captureDiffSnapshot(repoRoot);",
+          "line_start": 1251,
+          "line_end": 1254
+        }
+      },
+      {
+        "id": "b6",
+        "action": "rollback",
+        "object_role": "failed_change",
+        "tool_role": "version_control",
+        "inputs": [
+          "repository"
+        ],
+        "outputs": [
+          "restored_tracked_state"
+        ],
+        "evidence": {
+          "file": "src/gep/solidify.js",
+          "quote": "if (!dryRun && !success && rollbackOnFailure) {\n    rollbackTracked(repoRoot);",
+          "line_start": 1282,
+          "line_end": 1283
+        }
+      },
+      {
+        "id": "b8",
+        "action": "record",
+        "object_role": "learning_outcome",
+        "tool_role": "knowledge_store",
+        "inputs": [
+          "error_signature",
+          "gene",
+          "outcome",
+          "environment"
+        ],
+        "outputs": [
+          "knowledge_record"
+        ],
+        "evidence": {
+          "file": "src/gep/solidify.js",
+          "quote": "_knowledgeBase.recordOutcome({ errorHash, geneId: geneUsed.id, success, environment: envLabel });",
+          "line_start": 1316,
+          "line_end": 1316
+        }
+      },
+      {
+        "id": "b7",
+        "action": "record",
+        "object_role": "audit_records",
+        "tool_role": "asset_store",
+        "inputs": [
+          "validation_report",
+          "evolution_event"
+        ],
+        "outputs": [
+          "audit_log"
+        ],
+        "evidence": {
+          "file": "src/gep/solidify.js",
+          "quote": "if (!dryRun) {\n    appendEventJsonl(validationReport);\n    if (capsule) upsertCapsule(capsule);\n    appendEventJsonl(event);",
+          "line_start": 1321,
+          "line_end": 1324
+        }
+      }
+    ],
+    "activation": [
+      {
+        "intent_role": "solidify_change",
+        "required_context": [
+          "git_repository"
+        ],
+        "start_block": "b1",
+        "evidence": {
+          "file": "src/gep/solidify.js",
+          "quote": "Solidify requires git for rollback, diff capture, and blast radius.",
+          "line_start": 991,
+          "line_end": 991
+        }
+      }
+    ],
+    "procedure": [
+      {
+        "from": "b1",
+        "to": "b2",
+        "relation": "next",
+        "condition_role": "gene_present",
+        "evidence": {
+          "file": "src/gep/solidify.js",
+          "quote": "if (geneUsed) {\n    validation = runValidations(geneUsed, { repoRoot, timeoutMs: 180000 });",
+          "line_start": 1079,
+          "line_end": 1080
+        }
+      },
+      {
+        "from": "b2",
+        "to": "b3",
+        "relation": "next",
+        "condition_role": "none",
+        "evidence": {
+          "file": "src/gep/solidify.js",
+          "quote": "const canary = runCanaryCheck({ repoRoot, timeoutMs: 30000 });",
+          "line_start": 1085,
+          "line_end": 1085
+        }
+      },
+      {
+        "from": "b4",
+        "to": "b1",
+        "relation": "depends_on",
+        "condition_role": "none",
+        "evidence": {
+          "file": "src/gep/solidify.js",
+          "quote": "const success = constraintCheck.ok && validation.ok && protocolViolations.length === 0;",
+          "line_start": 1127,
+          "line_end": 1127
+        }
+      },
+      {
+        "from": "b4",
+        "to": "b2",
+        "relation": "depends_on",
+        "condition_role": "none",
+        "evidence": {
+          "file": "src/gep/solidify.js",
+          "quote": "const success = constraintCheck.ok && validation.ok && protocolViolations.length === 0;",
+          "line_start": 1127,
+          "line_end": 1127
+        }
+      },
+      {
+        "from": "b3",
+        "to": "b1",
+        "relation": "updates_result",
+        "condition_role": "canary_failed_and_not_skipped",
+        "evidence": {
+          "file": "src/gep/solidify.js",
+          "quote": "if (!canary.ok && !canary.skipped) {\n    constraintCheck.violations.push(\n      `canary_failed: index.js cannot load in child process: ${canary.err}`\n    );\n    constraintCheck.ok = false;",
+          "line_start": 1086,
+          "line_end": 1090
+        }
+      },
+      {
+        "from": "b4",
+        "to": "b5",
+        "relation": "branch_then",
+        "condition_role": "not_dry_run_and_failure",
+        "evidence": {
+          "file": "src/gep/solidify.js",
+          "quote": "// Capture failed mutation as a FailedCapsule before rollback destroys the diff.\n  if (!dryRun && !success) {\n    try {\n      var diffSnapshot = captureDiffSnapshot(repoRoot);",
+          "line_start": 1251,
+          "line_end": 1254
+        }
+      },
+      {
+        "from": "b4",
+        "to": "b6",
+        "relation": "branch_then",
+        "condition_role": "not_dry_run_and_failure_and_rollback_enabled",
+        "evidence": {
+          "file": "src/gep/solidify.js",
+          "quote": "if (!dryRun && !success && rollbackOnFailure) {\n    rollbackTracked(repoRoot);",
+          "line_start": 1282,
+          "line_end": 1283
+        }
+      },
+      {
+        "from": "b5",
+        "to": "b6",
+        "relation": "precedes",
+        "condition_role": "failure_path",
+        "evidence": {
+          "file": "src/gep/solidify.js",
+          "quote": "// Capture failed mutation as a FailedCapsule before rollback destroys the diff.\n  if (!dryRun && !success) {\n    try {\n      var diffSnapshot = captureDiffSnapshot(repoRoot);",
+          "line_start": 1251,
+          "line_end": 1254
+        }
+      },
+      {
+        "from": "b4",
+        "to": "b8",
+        "relation": "branch_then",
+        "condition_role": "not_dry_run_and_knowledge_store_and_gene_and_error_hash",
+        "evidence": {
+          "file": "src/gep/solidify.js",
+          "quote": "_knowledgeBase.recordOutcome({ errorHash, geneId: geneUsed.id, success, environment: envLabel });",
+          "line_start": 1316,
+          "line_end": 1316
+        }
+      }
+    ],
+    "resource_flow": [
+      {
+        "from": "b5",
+        "to": "diff_snapshot",
+        "relation": "produces",
+        "evidence": {
+          "file": "src/gep/solidify.js",
+          "quote": "// Capture failed mutation as a FailedCapsule before rollback destroys the diff.\n  if (!dryRun && !success) {\n    try {\n      var diffSnapshot = captureDiffSnapshot(repoRoot);",
+          "line_start": 1251,
+          "line_end": 1254
+        }
+      },
+      {
+        "from": "b6",
+        "to": "repository",
+        "relation": "consumes",
+        "evidence": {
+          "file": "src/gep/solidify.js",
+          "quote": "if (!dryRun && !success && rollbackOnFailure) {\n    rollbackTracked(repoRoot);",
+          "line_start": 1282,
+          "line_end": 1283
+        }
+      },
+      {
+        "from": "b7",
+        "to": "validation_report",
+        "relation": "consumes",
+        "evidence": {
+          "file": "src/gep/solidify.js",
+          "quote": "if (!dryRun) {\n    appendEventJsonl(validationReport);\n    if (capsule) upsertCapsule(capsule);\n    appendEventJsonl(event);",
+          "line_start": 1321,
+          "line_end": 1324
+        }
+      },
+      {
+        "from": "b7",
+        "to": "evolution_event",
+        "relation": "consumes",
+        "evidence": {
+          "file": "src/gep/solidify.js",
+          "quote": "if (!dryRun) {\n    appendEventJsonl(validationReport);\n    if (capsule) upsertCapsule(capsule);\n    appendEventJsonl(event);",
+          "line_start": 1321,
+          "line_end": 1324
+        }
+      },
+      {
+        "from": "b7",
+        "to": "audit_log",
+        "relation": "produces",
+        "evidence": {
+          "file": "src/gep/solidify.js",
+          "quote": "if (!dryRun) {\n    appendEventJsonl(validationReport);\n    if (capsule) upsertCapsule(capsule);\n    appendEventJsonl(event);",
+          "line_start": 1321,
+          "line_end": 1324
+        }
+      }
+    ]
+  }
+}

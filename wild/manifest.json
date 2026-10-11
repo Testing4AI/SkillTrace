@@ -1,0 +1,40 @@
+{
+  "schema": "skilltrace.public-wild-inventory.v1",
+  "records": 36446,
+  "excluded_injected_controls": 480,
+  "platform_counts": {
+    "clawhub": 6277,
+    "skillhub": 26333,
+    "skillsrest": 3836
+  },
+  "source_pool_counts": {
+    "clawhub_discovery_stage1_v2": 5428,
+    "clawhub_query_pool_v1": 849,
+    "skillhub_fullmeta_v2_max400": 24948,
+    "skillhub_large_pool_v1": 1385,
+    "skillsrest_balanced_full_v1": 46,
+    "skillsrest_fullmeta_v2": 1945,
+    "skillsrest_pool_v1": 1845
+  },
+  "category_counts": {
+    "education-research": 1062,
+    "content-communication": 2122,
+    "software-engineering": 22005,
+    "finance-accounting": 1369,
+    "personal-productivity": 1046,
+    "security-ops": 575,
+    "data-analytics": 3571,
+    "design-creative": 1986,
+    "legal-compliance": 1739,
+    "marketing-sales": 971
+  },
+  "records_with_recorded_source_url": 5925,
+  "inventory_sha256": "b5decd9b124b2de8c3417aa49baad11639d1db96a8bf774975629adaa4728c98",
+  "source_receipt": {
+    "file": "wild_skill_cards.jsonl",
+    "sha256": "5941f09528b3ca50368fc975825525c855f0d20357fcadd469255dc23526a52e"
+  },
+  "unit": "Collected skill records; cross-registry mirrors and versions are retained.",
+  "hash_definition": "Recorded SHA-256 of parser-produced flattened text, not an archive hash.",
+  "url_policy": "Only recorded HTTP(S) source URLs; query and fragment removed; missing links remain blank."
+}

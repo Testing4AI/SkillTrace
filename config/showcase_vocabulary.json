@@ -1,0 +1,13 @@
+{
+  "version": "showcase-1",
+  "scope": "Frozen vocabulary for the public examples; not the withheld benchmark vocabulary",
+  "action": ["inspect", "validate", "fill", "verify", "export", "select", "retrieve", "load", "check", "report"],
+  "object_role": ["pdf_form", "record", "filled_form", "analysis_request", "news_evidence", "watchlist_state", "alert_condition", "alert_result"],
+  "tool_role": ["none", "pdf_reader", "schema_validator", "pdf_writer", "local_store", "news_api", "monitoring_tool"],
+  "artifact_role": ["blank_form", "field_inventory", "record", "validated_record", "filled_form", "checked_form", "output_file", "instrument", "analysis_mode", "news_observation", "watchlist_state", "watchlist_condition", "market_observation", "alert_result"],
+  "intent_role": ["fill_form", "analyze_security", "check_alerts"],
+  "procedure_relation": ["next", "depends_on", "branch_then", "branch_else", "fallback", "bypass"],
+  "condition_role": ["none", "missing_required_field", "reduced_analysis_mode", "tool_failure"],
+  "resource_relation": ["consumes", "produces", "uses_tool"]
+}
+

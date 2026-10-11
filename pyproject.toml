@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "skilltrace"
+version = "0.3.0"
+description = "Multi-trace provenance auditing for LLM-agent skill reuse"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+skilltrace = "skilltrace.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

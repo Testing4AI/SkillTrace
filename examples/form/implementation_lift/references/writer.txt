@@ -1,0 +1,14 @@
+Writer recipe (illustrative API; not executed by the auditor):
+
+```python
+def write_checked_form(template, record, destination):
+    inventory = inspect_fields(template)
+    validated = validate_record(record, inventory)
+    writer = PdfWriter(template)
+    writer.fill(validated)
+    filled = writer.save_intermediate()
+    assert read_field_values(filled) == validated
+    export_document(filled, destination)
+    return {"output_file": destination, "verified": True}
+```
+

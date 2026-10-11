@@ -1,0 +1,314 @@
+{
+  "graph": {
+    "activation": [
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Start when the user supplies a blank form and a structured record."
+        },
+        "intent_role": "fill_form",
+        "required_context": [
+          "blank_form",
+          "record"
+        ],
+        "start_block": "b1"
+      }
+    ],
+    "blocks": [
+      {
+        "action": "inspect",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Inspect the blank form with a PDF reader to obtain its field inventory."
+        },
+        "id": "b1",
+        "inputs": [
+          "blank_form"
+        ],
+        "object_role": "pdf_form",
+        "outputs": [
+          "field_inventory"
+        ],
+        "tool_role": "pdf_reader"
+      },
+      {
+        "action": "validate",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Validate the record against that inventory; stop if a required field is absent."
+        },
+        "id": "b2",
+        "inputs": [
+          "record",
+          "field_inventory"
+        ],
+        "object_role": "record",
+        "outputs": [
+          "validated_record"
+        ],
+        "tool_role": "schema_validator"
+      },
+      {
+        "action": "fill",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Fill the form with the validated record using a PDF writer."
+        },
+        "id": "b3",
+        "inputs": [
+          "blank_form",
+          "validated_record"
+        ],
+        "object_role": "pdf_form",
+        "outputs": [
+          "filled_form"
+        ],
+        "tool_role": "pdf_writer"
+      },
+      {
+        "action": "verify",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Reopen the filled form and verify that every written value matches the validated record."
+        },
+        "id": "b4",
+        "inputs": [
+          "filled_form",
+          "validated_record"
+        ],
+        "object_role": "filled_form",
+        "outputs": [
+          "checked_form"
+        ],
+        "tool_role": "pdf_reader"
+      },
+      {
+        "action": "export",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Export the checked form as the output file."
+        },
+        "id": "b5",
+        "inputs": [
+          "checked_form"
+        ],
+        "object_role": "filled_form",
+        "outputs": [
+          "output_file"
+        ],
+        "tool_role": "pdf_writer"
+      }
+    ],
+    "procedure": [
+      {
+        "condition_role": "none",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "The order is inspect, validate, fill, verify, then export."
+        },
+        "from": "b1",
+        "relation": "next",
+        "to": "b2"
+      },
+      {
+        "condition_role": "none",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "The order is inspect, validate, fill, verify, then export."
+        },
+        "from": "b2",
+        "relation": "next",
+        "to": "b3"
+      },
+      {
+        "condition_role": "none",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "The order is inspect, validate, fill, verify, then export."
+        },
+        "from": "b3",
+        "relation": "next",
+        "to": "b4"
+      },
+      {
+        "condition_role": "none",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "The order is inspect, validate, fill, verify, then export."
+        },
+        "from": "b4",
+        "relation": "next",
+        "to": "b5"
+      }
+    ],
+    "resource_flow": [
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Inspect the blank form with a PDF reader to obtain its field inventory."
+        },
+        "from": "b1",
+        "relation": "consumes",
+        "to": "blank_form"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Inspect the blank form with a PDF reader to obtain its field inventory."
+        },
+        "from": "b1",
+        "relation": "produces",
+        "to": "field_inventory"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Inspect the blank form with a PDF reader to obtain its field inventory."
+        },
+        "from": "b1",
+        "relation": "uses_tool",
+        "to": "pdf_reader"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Validate the record against that inventory; stop if a required field is absent."
+        },
+        "from": "b2",
+        "relation": "consumes",
+        "to": "record"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Validate the record against that inventory; stop if a required field is absent."
+        },
+        "from": "b2",
+        "relation": "consumes",
+        "to": "field_inventory"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Validate the record against that inventory; stop if a required field is absent."
+        },
+        "from": "b2",
+        "relation": "produces",
+        "to": "validated_record"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Validate the record against that inventory; stop if a required field is absent."
+        },
+        "from": "b2",
+        "relation": "uses_tool",
+        "to": "schema_validator"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Fill the form with the validated record using a PDF writer."
+        },
+        "from": "b3",
+        "relation": "consumes",
+        "to": "blank_form"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Fill the form with the validated record using a PDF writer."
+        },
+        "from": "b3",
+        "relation": "consumes",
+        "to": "validated_record"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Fill the form with the validated record using a PDF writer."
+        },
+        "from": "b3",
+        "relation": "produces",
+        "to": "filled_form"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Fill the form with the validated record using a PDF writer."
+        },
+        "from": "b3",
+        "relation": "uses_tool",
+        "to": "pdf_writer"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Reopen the filled form and verify that every written value matches the validated record."
+        },
+        "from": "b4",
+        "relation": "consumes",
+        "to": "filled_form"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Reopen the filled form and verify that every written value matches the validated record."
+        },
+        "from": "b4",
+        "relation": "consumes",
+        "to": "validated_record"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Reopen the filled form and verify that every written value matches the validated record."
+        },
+        "from": "b4",
+        "relation": "produces",
+        "to": "checked_form"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Reopen the filled form and verify that every written value matches the validated record."
+        },
+        "from": "b4",
+        "relation": "uses_tool",
+        "to": "pdf_reader"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Export the checked form as the output file."
+        },
+        "from": "b5",
+        "relation": "consumes",
+        "to": "checked_form"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Export the checked form as the output file."
+        },
+        "from": "b5",
+        "relation": "produces",
+        "to": "output_file"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Export the checked form as the output file."
+        },
+        "from": "b5",
+        "relation": "uses_tool",
+        "to": "pdf_writer"
+      }
+    ]
+  },
+  "provenance": {
+    "description": "Manual source-supported annotations; no claim of LLM extraction accuracy",
+    "kind": "curated_demonstration",
+    "version": "showcase-1"
+  }
+}

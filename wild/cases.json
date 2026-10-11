@@ -1,0 +1,44 @@
+{
+  "renamed-near-copy": {
+    "pair_id": "clawhub_discovery_stage1_v2:1person:1person__VS__clawhub_discovery_stage1_v2:oneperson:oneperson",
+    "candidate_scope": "global",
+    "left_id": "clawhub_discovery_stage1_v2:1person:1person",
+    "right_id": "clawhub_discovery_stage1_v2:oneperson:oneperson",
+    "RepoClone-Jaccard": 0.983607,
+    "SkillTrace-Expression": 0.979167,
+    "SkillTrace-Implementation": null,
+    "implementation_applicable": false,
+    "wild_conservative_bucket": "common_full_clone_candidate",
+    "evidence": {
+      "file": "SKILL.md",
+      "left_sha256": "a6d3e9bae66ef9cd10cfe1772632282878f277e9253c51f33e1b5d3b009ccfc1",
+      "right_sha256": "919bef2cbf4d0503ebcb1595fdf4865e7c96df891f7111a673121e852cb7b864",
+      "check": "Entire SKILL.md identical after replacing only the frontmatter name line.",
+      "left_excerpt": "name: 1person",
+      "right_excerpt": "name: oneperson"
+    },
+    "selection": "Illustrative inspection, not a random sample or a human clone label."
+  },
+  "retained-evolution-workflow": {
+    "pair_id": "skillhub_fullmeta_v2_max400:local-self-healing-machine-learning:local-self-healing-machine-learning__VS__skillsrest_fullmeta_v2:capability-evolver:capability-evolver",
+    "candidate_scope": "global",
+    "left_id": "skillhub_fullmeta_v2_max400:local-self-healing-machine-learning:local-self-healing-machine-learning",
+    "right_id": "skillsrest_fullmeta_v2:capability-evolver:capability-evolver",
+    "RepoClone-Jaccard": 0.491188,
+    "SkillTrace-Expression": 0.119861,
+    "SkillTrace-Implementation": 0.553732,
+    "implementation_applicable": true,
+    "wild_conservative_bucket": "low_priority",
+    "evidence": {
+      "file": "src/gep/solidify.js",
+      "left_sha256": "157b54514c5ca1b013ccab7019e46d6ce6e2bbee8bcc86b9b5ca0b840c1cd899",
+      "right_sha256": "46cc2af574bf11f0f26d0f942d95d47a3ebca28f5ad86d36219e2cdf2f98e6c7",
+      "left_bytes": 60432,
+      "right_bytes": 55919,
+      "check": "Different complete source files retain the same constraint/validation/protocol gate; see separately grounded SOG excerpts for conditional dependencies.",
+      "left_excerpt": "const success = constraintCheck.ok && validation.ok && protocolViolations.length === 0;",
+      "right_excerpt": "const success = constraintCheck.ok && validation.ok && protocolViolations.length === 0;"
+    },
+    "selection": "Illustrative inspection, not a random sample or a human clone label."
+  }
+}

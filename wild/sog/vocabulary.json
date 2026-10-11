@@ -1,0 +1,88 @@
+{
+  "action": [
+    "adapt",
+    "capture",
+    "check",
+    "configure",
+    "decide",
+    "obtain",
+    "record",
+    "rollback",
+    "validate"
+  ],
+  "object_role": [
+    "access_credential",
+    "audit_records",
+    "candidate_change",
+    "change_constraints",
+    "change_outcome",
+    "entry_point",
+    "execution_environment",
+    "failed_change",
+    "fix_strategy",
+    "learning_outcome"
+  ],
+  "tool_role": [
+    "asset_store",
+    "constraint_checker",
+    "credential_provider",
+    "environment",
+    "isolated_process",
+    "knowledge_store",
+    "learning_adapter",
+    "none",
+    "validation_runner",
+    "version_control"
+  ],
+  "artifact_role": [
+    "adapted_gene",
+    "api_key",
+    "audit_log",
+    "canary_result",
+    "change_extent",
+    "configured_credential",
+    "constraint_result",
+    "diff_snapshot",
+    "environment",
+    "error_signature",
+    "evolution_event",
+    "failure_mode",
+    "gene",
+    "git_repository",
+    "knowledge_record",
+    "learning_signals",
+    "outcome",
+    "protocol_violations",
+    "repository",
+    "restored_tracked_state",
+    "validation_report",
+    "validation_result"
+  ],
+  "intent_role": [
+    "set_up_access",
+    "solidify_change"
+  ],
+  "procedure_relation": [
+    "branch_then",
+    "depends_on",
+    "next",
+    "precedes",
+    "updates_result"
+  ],
+  "condition_role": [
+    "canary_failed_and_not_skipped",
+    "failure_path",
+    "gene_present",
+    "none",
+    "not_dry_run_and_failure",
+    "not_dry_run_and_failure_and_rollback_enabled",
+    "not_dry_run_and_knowledge_store_and_gene_and_error_hash",
+    "not_dry_run_and_valid_gene"
+  ],
+  "resource_relation": [
+    "consumes",
+    "produces"
+  ],
+  "version": "wild-excerpts-1",
+  "scope": "Editorial excerpt vocabulary; not benchmark calibration vocabulary"
+}

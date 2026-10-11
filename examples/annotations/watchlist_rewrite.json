@@ -1,0 +1,272 @@
+{
+  "graph": {
+    "activation": [
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "On a briefing request, choose the processing profile for the requested ticker."
+        },
+        "intent_role": "analyze_security",
+        "required_context": [
+          "instrument"
+        ],
+        "start_block": "b1"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "On a notification request, first restore the persistent tracking list and its rules from the local store."
+        },
+        "intent_role": "check_alerts",
+        "required_context": [],
+        "start_block": "b3"
+      }
+    ],
+    "blocks": [
+      {
+        "action": "select",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "On a briefing request, choose the processing profile for the requested ticker."
+        },
+        "id": "b1",
+        "inputs": [
+          "instrument"
+        ],
+        "object_role": "analysis_request",
+        "outputs": [
+          "analysis_mode"
+        ],
+        "tool_role": "none"
+      },
+      {
+        "action": "retrieve",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "The regular profile queries a headline provider, whereas the minimal profile omits that lookup."
+        },
+        "id": "b2",
+        "inputs": [
+          "instrument"
+        ],
+        "object_role": "news_evidence",
+        "outputs": [
+          "news_observation"
+        ],
+        "tool_role": "news_api"
+      },
+      {
+        "action": "load",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "On a notification request, first restore the persistent tracking list and its rules from the local store."
+        },
+        "id": "b3",
+        "inputs": [],
+        "object_role": "watchlist_state",
+        "outputs": [
+          "watchlist_state",
+          "watchlist_condition"
+        ],
+        "tool_role": "local_store"
+      },
+      {
+        "action": "check",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Next, evaluate those rules against the latest quotations through the monitoring interface to obtain notification findings."
+        },
+        "id": "b4",
+        "inputs": [
+          "watchlist_state",
+          "watchlist_condition",
+          "market_observation"
+        ],
+        "object_role": "alert_condition",
+        "outputs": [
+          "alert_result"
+        ],
+        "tool_role": "monitoring_tool"
+      },
+      {
+        "action": "report",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Return the notification findings."
+        },
+        "id": "b5",
+        "inputs": [
+          "alert_result"
+        ],
+        "object_role": "alert_result",
+        "outputs": [],
+        "tool_role": "none"
+      }
+    ],
+    "procedure": [
+      {
+        "condition_role": "reduced_analysis_mode",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "The regular profile queries a headline provider, whereas the minimal profile omits that lookup."
+        },
+        "from": "b1",
+        "relation": "bypass",
+        "to": "b2"
+      },
+      {
+        "condition_role": "none",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Restore before evaluation; evaluation precedes returning findings."
+        },
+        "from": "b3",
+        "relation": "next",
+        "to": "b4"
+      },
+      {
+        "condition_role": "none",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Restore before evaluation; evaluation precedes returning findings."
+        },
+        "from": "b4",
+        "relation": "next",
+        "to": "b5"
+      }
+    ],
+    "resource_flow": [
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "On a briefing request, choose the processing profile for the requested ticker."
+        },
+        "from": "b1",
+        "relation": "consumes",
+        "to": "instrument"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "On a briefing request, choose the processing profile for the requested ticker."
+        },
+        "from": "b1",
+        "relation": "produces",
+        "to": "analysis_mode"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "The regular profile queries a headline provider, whereas the minimal profile omits that lookup."
+        },
+        "from": "b2",
+        "relation": "consumes",
+        "to": "instrument"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "The regular profile queries a headline provider, whereas the minimal profile omits that lookup."
+        },
+        "from": "b2",
+        "relation": "produces",
+        "to": "news_observation"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "The regular profile queries a headline provider, whereas the minimal profile omits that lookup."
+        },
+        "from": "b2",
+        "relation": "uses_tool",
+        "to": "news_api"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "On a notification request, first restore the persistent tracking list and its rules from the local store."
+        },
+        "from": "b3",
+        "relation": "produces",
+        "to": "watchlist_state"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "On a notification request, first restore the persistent tracking list and its rules from the local store."
+        },
+        "from": "b3",
+        "relation": "produces",
+        "to": "watchlist_condition"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "On a notification request, first restore the persistent tracking list and its rules from the local store."
+        },
+        "from": "b3",
+        "relation": "uses_tool",
+        "to": "local_store"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Next, evaluate those rules against the latest quotations through the monitoring interface to obtain notification findings."
+        },
+        "from": "b4",
+        "relation": "consumes",
+        "to": "watchlist_state"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Next, evaluate those rules against the latest quotations through the monitoring interface to obtain notification findings."
+        },
+        "from": "b4",
+        "relation": "consumes",
+        "to": "watchlist_condition"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Next, evaluate those rules against the latest quotations through the monitoring interface to obtain notification findings."
+        },
+        "from": "b4",
+        "relation": "consumes",
+        "to": "market_observation"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Next, evaluate those rules against the latest quotations through the monitoring interface to obtain notification findings."
+        },
+        "from": "b4",
+        "relation": "produces",
+        "to": "alert_result"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Next, evaluate those rules against the latest quotations through the monitoring interface to obtain notification findings."
+        },
+        "from": "b4",
+        "relation": "uses_tool",
+        "to": "monitoring_tool"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Return the notification findings."
+        },
+        "from": "b5",
+        "relation": "consumes",
+        "to": "alert_result"
+      }
+    ]
+  },
+  "provenance": {
+    "description": "Manual source-supported annotations; no claim of LLM extraction accuracy",
+    "kind": "curated_demonstration",
+    "version": "showcase-1"
+  }
+}

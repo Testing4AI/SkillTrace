@@ -1,0 +1,8 @@
+{
+  "source": "Threshold values reported in the paper; used for demonstration, not fitted on these examples",
+  "thresholds": {"expression": 0.172, "implementation": 0.139, "operational": 0.406},
+  "decision_bound": 1.0,
+  "alpha": 0.05,
+  "baseline_thresholds": {"repo_jaccard": 0.182, "ssdeep": 0.0},
+  "scope": "Use independently calibrated thresholds for new corpora and extraction configurations."
+}

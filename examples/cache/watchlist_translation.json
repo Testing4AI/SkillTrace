@@ -1,0 +1,401 @@
+{
+  "cache_key": "3a620b0c6102f888b4bc70f889e3d82982e765166dc8214e8d2760b3902b9de8",
+  "config": {
+    "extractor": {
+      "description": "Manual source-supported annotations; no claim of LLM extraction accuracy",
+      "kind": "curated_demonstration",
+      "version": "showcase-1"
+    },
+    "implementation_min_chars": 200,
+    "version": "skilltrace.trace.v2",
+    "vocabulary": {
+      "action": [
+        "inspect",
+        "validate",
+        "fill",
+        "verify",
+        "export",
+        "select",
+        "retrieve",
+        "load",
+        "check",
+        "report"
+      ],
+      "artifact_role": [
+        "blank_form",
+        "field_inventory",
+        "record",
+        "validated_record",
+        "filled_form",
+        "checked_form",
+        "output_file",
+        "instrument",
+        "analysis_mode",
+        "news_observation",
+        "watchlist_state",
+        "watchlist_condition",
+        "market_observation",
+        "alert_result"
+      ],
+      "condition_role": [
+        "none",
+        "missing_required_field",
+        "reduced_analysis_mode",
+        "tool_failure"
+      ],
+      "intent_role": [
+        "fill_form",
+        "analyze_security",
+        "check_alerts"
+      ],
+      "object_role": [
+        "pdf_form",
+        "record",
+        "filled_form",
+        "analysis_request",
+        "news_evidence",
+        "watchlist_state",
+        "alert_condition",
+        "alert_result"
+      ],
+      "procedure_relation": [
+        "next",
+        "depends_on",
+        "branch_then",
+        "branch_else",
+        "fallback",
+        "bypass"
+      ],
+      "resource_relation": [
+        "consumes",
+        "produces",
+        "uses_tool"
+      ],
+      "scope": "Frozen vocabulary for the public examples; not the withheld benchmark vocabulary",
+      "tool_role": [
+        "none",
+        "pdf_reader",
+        "schema_validator",
+        "pdf_writer",
+        "local_store",
+        "news_api",
+        "monitoring_tool"
+      ],
+      "version": "showcase-1"
+    }
+  },
+  "config_digest": "6c30d8252b69ece6b75f45a1a3f3e3bfd8b1234f091398a065159af4c4b82cd6",
+  "expression": {
+    "files": [
+      "SKILL.md"
+    ],
+    "tokens": [
+      "为指定标的选择分析模式",
+      "先从本地存储加载观察清单及预警条件",
+      "将已保存的条件与当前行情观测进行比较",
+      "快速模式跳过新闻获取",
+      "报告预警结果",
+      "提供证券简报并检查持久化的观察清单",
+      "收到证券分析请求时",
+      "收到预警检查请求时",
+      "普通模式通过新闻服务获取资讯",
+      "检查和报告",
+      "生成预警结果",
+      "行情观察助手",
+      "随后使用监控工具",
+      "预警流程依次为加载"
+    ]
+  },
+  "implementation": {
+    "applicable": false,
+    "code_chars": 0,
+    "pointers": [],
+    "tokens": []
+  },
+  "integrity": "74e51e984c9d81bfc30814eaf4cb8f139f363390ba295dc642b1dc9ce8eff9ad",
+  "operational": {
+    "activation": [
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "收到证券分析请求时，为指定标的选择分析模式。"
+        },
+        "intent_role": "analyze_security",
+        "required_context": [
+          "instrument"
+        ],
+        "start_block": "b1"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "收到预警检查请求时，先从本地存储加载观察清单及预警条件。"
+        },
+        "intent_role": "check_alerts",
+        "required_context": [],
+        "start_block": "b3"
+      }
+    ],
+    "blocks": [
+      {
+        "action": "select",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "收到证券分析请求时，为指定标的选择分析模式。"
+        },
+        "id": "b1",
+        "inputs": [
+          "instrument"
+        ],
+        "object_role": "analysis_request",
+        "outputs": [
+          "analysis_mode"
+        ],
+        "tool_role": "none"
+      },
+      {
+        "action": "retrieve",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "普通模式通过新闻服务获取资讯；快速模式跳过新闻获取。"
+        },
+        "id": "b2",
+        "inputs": [
+          "instrument"
+        ],
+        "object_role": "news_evidence",
+        "outputs": [
+          "news_observation"
+        ],
+        "tool_role": "news_api"
+      },
+      {
+        "action": "load",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "收到预警检查请求时，先从本地存储加载观察清单及预警条件。"
+        },
+        "id": "b3",
+        "inputs": [],
+        "object_role": "watchlist_state",
+        "outputs": [
+          "watchlist_state",
+          "watchlist_condition"
+        ],
+        "tool_role": "local_store"
+      },
+      {
+        "action": "check",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "随后使用监控工具，将已保存的条件与当前行情观测进行比较，生成预警结果。"
+        },
+        "id": "b4",
+        "inputs": [
+          "watchlist_state",
+          "watchlist_condition",
+          "market_observation"
+        ],
+        "object_role": "alert_condition",
+        "outputs": [
+          "alert_result"
+        ],
+        "tool_role": "monitoring_tool"
+      },
+      {
+        "action": "report",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "报告预警结果。"
+        },
+        "id": "b5",
+        "inputs": [
+          "alert_result"
+        ],
+        "object_role": "alert_result",
+        "outputs": [],
+        "tool_role": "none"
+      }
+    ],
+    "procedure": [
+      {
+        "condition_role": "reduced_analysis_mode",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "普通模式通过新闻服务获取资讯；快速模式跳过新闻获取。"
+        },
+        "from": "b1",
+        "relation": "bypass",
+        "to": "b2"
+      },
+      {
+        "condition_role": "none",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "预警流程依次为加载、检查和报告。"
+        },
+        "from": "b3",
+        "relation": "next",
+        "to": "b4"
+      },
+      {
+        "condition_role": "none",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "预警流程依次为加载、检查和报告。"
+        },
+        "from": "b4",
+        "relation": "next",
+        "to": "b5"
+      }
+    ],
+    "resource_flow": [
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "收到证券分析请求时，为指定标的选择分析模式。"
+        },
+        "from": "b1",
+        "relation": "consumes",
+        "to": "instrument"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "收到证券分析请求时，为指定标的选择分析模式。"
+        },
+        "from": "b1",
+        "relation": "produces",
+        "to": "analysis_mode"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "普通模式通过新闻服务获取资讯；快速模式跳过新闻获取。"
+        },
+        "from": "b2",
+        "relation": "consumes",
+        "to": "instrument"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "普通模式通过新闻服务获取资讯；快速模式跳过新闻获取。"
+        },
+        "from": "b2",
+        "relation": "produces",
+        "to": "news_observation"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "普通模式通过新闻服务获取资讯；快速模式跳过新闻获取。"
+        },
+        "from": "b2",
+        "relation": "uses_tool",
+        "to": "news_api"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "收到预警检查请求时，先从本地存储加载观察清单及预警条件。"
+        },
+        "from": "b3",
+        "relation": "produces",
+        "to": "watchlist_state"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "收到预警检查请求时，先从本地存储加载观察清单及预警条件。"
+        },
+        "from": "b3",
+        "relation": "produces",
+        "to": "watchlist_condition"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "收到预警检查请求时，先从本地存储加载观察清单及预警条件。"
+        },
+        "from": "b3",
+        "relation": "uses_tool",
+        "to": "local_store"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "随后使用监控工具，将已保存的条件与当前行情观测进行比较，生成预警结果。"
+        },
+        "from": "b4",
+        "relation": "consumes",
+        "to": "watchlist_state"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "随后使用监控工具，将已保存的条件与当前行情观测进行比较，生成预警结果。"
+        },
+        "from": "b4",
+        "relation": "consumes",
+        "to": "watchlist_condition"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "随后使用监控工具，将已保存的条件与当前行情观测进行比较，生成预警结果。"
+        },
+        "from": "b4",
+        "relation": "consumes",
+        "to": "market_observation"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "随后使用监控工具，将已保存的条件与当前行情观测进行比较，生成预警结果。"
+        },
+        "from": "b4",
+        "relation": "produces",
+        "to": "alert_result"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "随后使用监控工具，将已保存的条件与当前行情观测进行比较，生成预警结果。"
+        },
+        "from": "b4",
+        "relation": "uses_tool",
+        "to": "monitoring_tool"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "报告预警结果。"
+        },
+        "from": "b5",
+        "relation": "consumes",
+        "to": "alert_result"
+      }
+    ]
+  },
+  "repository_tokens": [
+    "description",
+    "name",
+    "为指定标的选择分析模式",
+    "先从本地存储加载观察清单及预警条件",
+    "将已保存的条件与当前行情观测进行比较",
+    "快速模式跳过新闻获取",
+    "报告预警结果",
+    "提供证券简报并检查持久化的观察清单",
+    "收到证券分析请求时",
+    "收到预警检查请求时",
+    "普通模式通过新闻服务获取资讯",
+    "检查和报告",
+    "生成预警结果",
+    "行情观察助手",
+    "随后使用监控工具",
+    "预警流程依次为加载"
+  ],
+  "schema": "skilltrace.trace.v2",
+  "source_digest": "696b5ceacd3a8f61f87fb066de4d6ac0c04b71f781cfa4648c8da89150ab2191"
+}

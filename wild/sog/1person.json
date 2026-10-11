@@ -1,0 +1,114 @@
+{
+  "schema": "skilltrace.wild-sog-excerpt.v1",
+  "extraction": {
+    "kind": "source-grounded editorial annotation",
+    "scope": "selected local operations, not full graphs",
+    "independent_provider_extraction": false,
+    "full_operational_score": null
+  },
+  "source_files": {
+    "SKILL.md": {
+      "sha256": "a6d3e9bae66ef9cd10cfe1772632282878f277e9253c51f33e1b5d3b009ccfc1"
+    }
+  },
+  "graph": {
+    "blocks": [
+      {
+        "id": "s1",
+        "action": "obtain",
+        "object_role": "access_credential",
+        "tool_role": "credential_provider",
+        "inputs": [],
+        "outputs": [
+          "api_key"
+        ],
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "1. Get your API key at [1person.pro](https://1person.pro)",
+          "line_start": 20,
+          "line_end": 20
+        }
+      },
+      {
+        "id": "s2",
+        "action": "configure",
+        "object_role": "execution_environment",
+        "tool_role": "environment",
+        "inputs": [
+          "api_key"
+        ],
+        "outputs": [
+          "configured_credential"
+        ],
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "2. Set `ONEPERSON_API_KEY` in your environment",
+          "line_start": 21,
+          "line_end": 21
+        }
+      }
+    ],
+    "activation": [
+      {
+        "intent_role": "set_up_access",
+        "required_context": [],
+        "start_block": "s1",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "## Getting Started",
+          "line_start": 18,
+          "line_end": 18
+        }
+      }
+    ],
+    "procedure": [
+      {
+        "from": "s1",
+        "to": "s2",
+        "relation": "next",
+        "condition_role": "none",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "1. Get your API key at [1person.pro](https://1person.pro)\n2. Set `ONEPERSON_API_KEY` in your environment",
+          "line_start": 20,
+          "line_end": 21
+        }
+      }
+    ],
+    "resource_flow": [
+      {
+        "from": "s1",
+        "to": "api_key",
+        "relation": "produces",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "1. Get your API key at [1person.pro](https://1person.pro)",
+          "line_start": 20,
+          "line_end": 20
+        }
+      },
+      {
+        "from": "s2",
+        "to": "api_key",
+        "relation": "consumes",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "2. Set `ONEPERSON_API_KEY` in your environment",
+          "line_start": 21,
+          "line_end": 21
+        }
+      },
+      {
+        "from": "s2",
+        "to": "configured_credential",
+        "relation": "produces",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "2. Set `ONEPERSON_API_KEY` in your environment",
+          "line_start": 21,
+          "line_end": 21
+        }
+      }
+    ]
+  }
+}

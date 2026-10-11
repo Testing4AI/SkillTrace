@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1140" viewBox="0 0 1400 1140">
+<rect width="1400" height="1140" fill="#f5f7fb"/>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#20324a}.mono{font-family:Menlo,Consolas,monospace}</style>
+<text x="40" y="48" font-size="32" font-weight="bold" style="fill:#20324a" class="">Different names. Retained operational structure.</text>
+<text x="40" y="82" font-size="22" font-weight="normal" style="fill:#52657e" class="">Example SOG Excerpts (Not Full Graphs)</text>
+<text x="40" y="116" font-size="20" font-weight="normal" style="fill:#20324a" class="">Saved whole-package scores: Expression 0.120   |   Implementation 0.554   |   Repo-Jaccard 0.491</text>
+<rect x="40" y="142" width="630" height="896" rx="12" fill="#ffffff" stroke="#d6dfea"/>
+<text x="62" y="177" font-size="24" font-weight="bold" style="fill:#20324a" class="">local-self-healing-</text>
+<text x="62" y="204" font-size="24" font-weight="bold" style="fill:#20324a" class="">machine-learning</text>
+<text x="62" y="229" font-size="17" font-weight="normal" style="fill:#6a7a90" class="">SkillHub snapshot</text>
+<rect x="60" y="248" width="590" height="90" rx="12" fill="#f0edfb" stroke="#d6dfea"/>
+<text x="76" y="277" font-size="16" font-weight="bold" style="fill:#645092" class="">ACTIVATION</text>
+<text x="76" y="307" font-size="21" font-weight="normal" style="fill:#20324a" class="">Solidify a change · Git repository required</text>
+<rect x="60" y="354" width="590" height="302" rx="12" fill="#eaf3fd" stroke="#d6dfea"/>
+<text x="76" y="383" font-size="16" font-weight="bold" style="fill:#285b8d" class="">PROCEDURE · SELECTED FAILURE PATH</text>
+<text x="76" y="414" font-size="20" font-weight="normal" style="fill:#20324a" class="">Constraint check + validation + canary</text>
+<text x="76" y="467" font-size="20" font-weight="normal" style="fill:#20324a" class="">Outcome gate: checks pass ∧ no protocol violation</text>
+<text x="76" y="533" font-size="20" font-weight="bold" style="fill:#20324a" class="">Capture failed diff before rollback</text>
+<text x="76" y="617" font-size="20" font-weight="bold" style="fill:#20324a" class="">Roll back tracked changes</text>
+<text x="88" y="439" font-size="25" font-weight="normal" style="fill:#4278a7" class="">↓</text>
+<text x="88" y="498" font-size="18" font-weight="normal" style="fill:#285b8d" class="">↓  failure AND not dry run</text>
+<text x="88" y="565" font-size="18" font-weight="normal" style="fill:#285b8d" class="">↓  rollback enabled AND not dry run</text>
+<text x="88" y="591" font-size="17" font-weight="normal" style="fill:#52718f" class="">Preserve evidence before destructive recovery</text>
+<rect x="60" y="672" width="590" height="169" rx="12" fill="#eaf7f2" stroke="#d6dfea"/>
+<text x="76" y="701" font-size="16" font-weight="bold" style="fill:#2b725a" class="">RESOURCE-FLOW + FIVE-FIELD BLOCK</text>
+<text x="76" y="730" font-size="21" font-weight="bold" style="fill:#20324a" class="">Repository → capture → diff snapshot</text>
+<text x="76" y="759" font-size="18" font-weight="normal" style="fill:#20324a" class="mono">action: capture   object: failed_change</text>
+<text x="76" y="785" font-size="18" font-weight="normal" style="fill:#20324a" class="mono">tool: version_control   in: repository</text>
+<text x="76" y="811" font-size="18" font-weight="normal" style="fill:#20324a" class="mono">out: diff_snapshot</text>
+<rect x="60" y="857" width="590" height="157" rx="12" fill="#fff3e6" stroke="#d6dfea"/>
+<text x="76" y="886" font-size="16" font-weight="bold" style="fill:#995d25" class="">DISTINCT LEARNING HOOK (RETAINED)</text>
+<text x="76" y="916" font-size="19" font-weight="bold" style="fill:#20324a" class="">Record outcome in persistent knowledge store</text>
+<text x="76" y="951" font-size="19" font-weight="normal" style="fill:#20324a" class="">Inputs: error signature, gene, outcome, environment</text>
+<text x="76" y="984" font-size="19" font-weight="normal" style="fill:#20324a" class="">Condition: store + gene + error hash; not dry run</text>
+<rect x="730" y="142" width="630" height="896" rx="12" fill="#ffffff" stroke="#d6dfea"/>
+<text x="752" y="177" font-size="24" font-weight="bold" style="fill:#20324a" class="">capability-evolver</text>
+<text x="752" y="229" font-size="17" font-weight="normal" style="fill:#6a7a90" class="">SkillsRest snapshot</text>
+<rect x="750" y="248" width="590" height="90" rx="12" fill="#f0edfb" stroke="#d6dfea"/>
+<text x="766" y="277" font-size="16" font-weight="bold" style="fill:#645092" class="">ACTIVATION</text>
+<text x="766" y="307" font-size="21" font-weight="normal" style="fill:#20324a" class="">Solidify a change · Git repository required</text>
+<rect x="750" y="354" width="590" height="302" rx="12" fill="#eaf3fd" stroke="#d6dfea"/>
+<text x="766" y="383" font-size="16" font-weight="bold" style="fill:#285b8d" class="">PROCEDURE · SELECTED FAILURE PATH</text>
+<text x="766" y="414" font-size="20" font-weight="normal" style="fill:#20324a" class="">Constraint check + validation + canary</text>
+<text x="766" y="467" font-size="20" font-weight="normal" style="fill:#20324a" class="">Outcome gate: checks pass ∧ no protocol violation</text>
+<text x="766" y="533" font-size="20" font-weight="bold" style="fill:#20324a" class="">Capture failed diff before rollback</text>
+<text x="766" y="617" font-size="20" font-weight="bold" style="fill:#20324a" class="">Roll back tracked changes</text>
+<text x="778" y="439" font-size="25" font-weight="normal" style="fill:#4278a7" class="">↓</text>
+<text x="778" y="498" font-size="18" font-weight="normal" style="fill:#285b8d" class="">↓  failure AND not dry run</text>
+<text x="778" y="565" font-size="18" font-weight="normal" style="fill:#285b8d" class="">↓  rollback enabled AND not dry run</text>
+<text x="778" y="591" font-size="17" font-weight="normal" style="fill:#52718f" class="">Preserve evidence before destructive recovery</text>
+<rect x="750" y="672" width="590" height="169" rx="12" fill="#eaf7f2" stroke="#d6dfea"/>
+<text x="766" y="701" font-size="16" font-weight="bold" style="fill:#2b725a" class="">RESOURCE-FLOW + FIVE-FIELD BLOCK</text>
+<text x="766" y="730" font-size="21" font-weight="bold" style="fill:#20324a" class="">Repository → capture → diff snapshot</text>
+<text x="766" y="759" font-size="18" font-weight="normal" style="fill:#20324a" class="mono">action: capture   object: failed_change</text>
+<text x="766" y="785" font-size="18" font-weight="normal" style="fill:#20324a" class="mono">tool: version_control   in: repository</text>
+<text x="766" y="811" font-size="18" font-weight="normal" style="fill:#20324a" class="mono">out: diff_snapshot</text>
+<rect x="750" y="857" width="590" height="157" rx="12" fill="#fff3e6" stroke="#d6dfea"/>
+<text x="766" y="886" font-size="16" font-weight="bold" style="fill:#995d25" class="">DISTINCT LEARNING HOOK (RETAINED)</text>
+<text x="766" y="916" font-size="19" font-weight="bold" style="fill:#20324a" class="">Adapt the gene from learning signals</text>
+<text x="766" y="951" font-size="19" font-weight="normal" style="fill:#20324a" class="">Inputs: gene, outcome, learning signals, failure mode</text>
+<text x="766" y="984" font-size="19" font-weight="normal" style="fill:#20324a" class="">Condition: valid gene; not dry run</text>
+<text x="40" y="1071" font-size="21" font-weight="bold" style="fill:#20324a" class="">Source-grounded editorial annotations · 7 shared blocks + 1 distinct hook per selected excerpt</text>
+<text x="40" y="1105" font-size="18" font-weight="normal" style="fill:#52657e" class="">Source: src/gep/solidify.js on each side. No whole-graph O score or new detection claim is inferred from this figure.</text>
+</svg>

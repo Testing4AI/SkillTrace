@@ -1,0 +1,314 @@
+{
+  "graph": {
+    "activation": [
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Accept an empty PDF template together with machine-readable entries."
+        },
+        "intent_role": "fill_form",
+        "required_context": [
+          "blank_form",
+          "record"
+        ],
+        "start_block": "b1"
+      }
+    ],
+    "blocks": [
+      {
+        "action": "inspect",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Discover editable slots in the template through a document-reading interface."
+        },
+        "id": "b1",
+        "inputs": [
+          "blank_form"
+        ],
+        "object_role": "pdf_form",
+        "outputs": [
+          "field_inventory"
+        ],
+        "tool_role": "pdf_reader"
+      },
+      {
+        "action": "validate",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Check the entries against those slots and reject incomplete mandatory entries."
+        },
+        "id": "b2",
+        "inputs": [
+          "record",
+          "field_inventory"
+        ],
+        "object_role": "record",
+        "outputs": [
+          "validated_record"
+        ],
+        "tool_role": "schema_validator"
+      },
+      {
+        "action": "fill",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Populate the template through a document-writing interface using the accepted entries."
+        },
+        "id": "b3",
+        "inputs": [
+          "blank_form",
+          "validated_record"
+        ],
+        "object_role": "pdf_form",
+        "outputs": [
+          "filled_form"
+        ],
+        "tool_role": "pdf_writer"
+      },
+      {
+        "action": "verify",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Read back the completed document and compare its stored contents with the accepted entries."
+        },
+        "id": "b4",
+        "inputs": [
+          "filled_form",
+          "validated_record"
+        ],
+        "object_role": "filled_form",
+        "outputs": [
+          "checked_form"
+        ],
+        "tool_role": "pdf_reader"
+      },
+      {
+        "action": "export",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Deliver the inspected document at the requested destination."
+        },
+        "id": "b5",
+        "inputs": [
+          "checked_form"
+        ],
+        "object_role": "filled_form",
+        "outputs": [
+          "output_file"
+        ],
+        "tool_role": "pdf_writer"
+      }
+    ],
+    "procedure": [
+      {
+        "condition_role": "none",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Perform discovery before checking, checking before population, population before read-back, and read-back before delivery."
+        },
+        "from": "b1",
+        "relation": "next",
+        "to": "b2"
+      },
+      {
+        "condition_role": "none",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Perform discovery before checking, checking before population, population before read-back, and read-back before delivery."
+        },
+        "from": "b2",
+        "relation": "next",
+        "to": "b3"
+      },
+      {
+        "condition_role": "none",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Perform discovery before checking, checking before population, population before read-back, and read-back before delivery."
+        },
+        "from": "b3",
+        "relation": "next",
+        "to": "b4"
+      },
+      {
+        "condition_role": "none",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Perform discovery before checking, checking before population, population before read-back, and read-back before delivery."
+        },
+        "from": "b4",
+        "relation": "next",
+        "to": "b5"
+      }
+    ],
+    "resource_flow": [
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Discover editable slots in the template through a document-reading interface."
+        },
+        "from": "b1",
+        "relation": "consumes",
+        "to": "blank_form"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Discover editable slots in the template through a document-reading interface."
+        },
+        "from": "b1",
+        "relation": "produces",
+        "to": "field_inventory"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Discover editable slots in the template through a document-reading interface."
+        },
+        "from": "b1",
+        "relation": "uses_tool",
+        "to": "pdf_reader"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Check the entries against those slots and reject incomplete mandatory entries."
+        },
+        "from": "b2",
+        "relation": "consumes",
+        "to": "record"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Check the entries against those slots and reject incomplete mandatory entries."
+        },
+        "from": "b2",
+        "relation": "consumes",
+        "to": "field_inventory"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Check the entries against those slots and reject incomplete mandatory entries."
+        },
+        "from": "b2",
+        "relation": "produces",
+        "to": "validated_record"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Check the entries against those slots and reject incomplete mandatory entries."
+        },
+        "from": "b2",
+        "relation": "uses_tool",
+        "to": "schema_validator"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Populate the template through a document-writing interface using the accepted entries."
+        },
+        "from": "b3",
+        "relation": "consumes",
+        "to": "blank_form"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Populate the template through a document-writing interface using the accepted entries."
+        },
+        "from": "b3",
+        "relation": "consumes",
+        "to": "validated_record"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Populate the template through a document-writing interface using the accepted entries."
+        },
+        "from": "b3",
+        "relation": "produces",
+        "to": "filled_form"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Populate the template through a document-writing interface using the accepted entries."
+        },
+        "from": "b3",
+        "relation": "uses_tool",
+        "to": "pdf_writer"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Read back the completed document and compare its stored contents with the accepted entries."
+        },
+        "from": "b4",
+        "relation": "consumes",
+        "to": "filled_form"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Read back the completed document and compare its stored contents with the accepted entries."
+        },
+        "from": "b4",
+        "relation": "consumes",
+        "to": "validated_record"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Read back the completed document and compare its stored contents with the accepted entries."
+        },
+        "from": "b4",
+        "relation": "produces",
+        "to": "checked_form"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Read back the completed document and compare its stored contents with the accepted entries."
+        },
+        "from": "b4",
+        "relation": "uses_tool",
+        "to": "pdf_reader"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Deliver the inspected document at the requested destination."
+        },
+        "from": "b5",
+        "relation": "consumes",
+        "to": "checked_form"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Deliver the inspected document at the requested destination."
+        },
+        "from": "b5",
+        "relation": "produces",
+        "to": "output_file"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Deliver the inspected document at the requested destination."
+        },
+        "from": "b5",
+        "relation": "uses_tool",
+        "to": "pdf_writer"
+      }
+    ]
+  },
+  "provenance": {
+    "description": "Manual source-supported annotations; no claim of LLM extraction accuracy",
+    "kind": "curated_demonstration",
+    "version": "showcase-1"
+  }
+}

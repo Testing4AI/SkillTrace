@@ -1,0 +1,272 @@
+{
+  "graph": {
+    "activation": [
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "For a security-analysis request, select an analysis mode for the instrument."
+        },
+        "intent_role": "analyze_security",
+        "required_context": [
+          "instrument"
+        ],
+        "start_block": "b1"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "For an alert-check request, start by loading the saved watchlist and its alert conditions from local storage."
+        },
+        "intent_role": "check_alerts",
+        "required_context": [],
+        "start_block": "b3"
+      }
+    ],
+    "blocks": [
+      {
+        "action": "select",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "For a security-analysis request, select an analysis mode for the instrument."
+        },
+        "id": "b1",
+        "inputs": [
+          "instrument"
+        ],
+        "object_role": "analysis_request",
+        "outputs": [
+          "analysis_mode"
+        ],
+        "tool_role": "none"
+      },
+      {
+        "action": "retrieve",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Normal mode retrieves news through the news service; fast mode bypasses news retrieval."
+        },
+        "id": "b2",
+        "inputs": [
+          "instrument"
+        ],
+        "object_role": "news_evidence",
+        "outputs": [
+          "news_observation"
+        ],
+        "tool_role": "news_api"
+      },
+      {
+        "action": "load",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "For an alert-check request, start by loading the saved watchlist and its alert conditions from local storage."
+        },
+        "id": "b3",
+        "inputs": [],
+        "object_role": "watchlist_state",
+        "outputs": [
+          "watchlist_state",
+          "watchlist_condition"
+        ],
+        "tool_role": "local_store"
+      },
+      {
+        "action": "check",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Then check the stored conditions against current market observations using the monitoring tool to produce an alert result."
+        },
+        "id": "b4",
+        "inputs": [
+          "watchlist_state",
+          "watchlist_condition",
+          "market_observation"
+        ],
+        "object_role": "alert_condition",
+        "outputs": [
+          "alert_result"
+        ],
+        "tool_role": "monitoring_tool"
+      },
+      {
+        "action": "report",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Report the alert result."
+        },
+        "id": "b5",
+        "inputs": [
+          "alert_result"
+        ],
+        "object_role": "alert_result",
+        "outputs": [],
+        "tool_role": "none"
+      }
+    ],
+    "procedure": [
+      {
+        "condition_role": "reduced_analysis_mode",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Normal mode retrieves news through the news service; fast mode bypasses news retrieval."
+        },
+        "from": "b1",
+        "relation": "bypass",
+        "to": "b2"
+      },
+      {
+        "condition_role": "none",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "The alert path is load, check, then report."
+        },
+        "from": "b3",
+        "relation": "next",
+        "to": "b4"
+      },
+      {
+        "condition_role": "none",
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "The alert path is load, check, then report."
+        },
+        "from": "b4",
+        "relation": "next",
+        "to": "b5"
+      }
+    ],
+    "resource_flow": [
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "For a security-analysis request, select an analysis mode for the instrument."
+        },
+        "from": "b1",
+        "relation": "consumes",
+        "to": "instrument"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "For a security-analysis request, select an analysis mode for the instrument."
+        },
+        "from": "b1",
+        "relation": "produces",
+        "to": "analysis_mode"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Normal mode retrieves news through the news service; fast mode bypasses news retrieval."
+        },
+        "from": "b2",
+        "relation": "consumes",
+        "to": "instrument"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Normal mode retrieves news through the news service; fast mode bypasses news retrieval."
+        },
+        "from": "b2",
+        "relation": "produces",
+        "to": "news_observation"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Normal mode retrieves news through the news service; fast mode bypasses news retrieval."
+        },
+        "from": "b2",
+        "relation": "uses_tool",
+        "to": "news_api"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "For an alert-check request, start by loading the saved watchlist and its alert conditions from local storage."
+        },
+        "from": "b3",
+        "relation": "produces",
+        "to": "watchlist_state"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "For an alert-check request, start by loading the saved watchlist and its alert conditions from local storage."
+        },
+        "from": "b3",
+        "relation": "produces",
+        "to": "watchlist_condition"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "For an alert-check request, start by loading the saved watchlist and its alert conditions from local storage."
+        },
+        "from": "b3",
+        "relation": "uses_tool",
+        "to": "local_store"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Then check the stored conditions against current market observations using the monitoring tool to produce an alert result."
+        },
+        "from": "b4",
+        "relation": "consumes",
+        "to": "watchlist_state"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Then check the stored conditions against current market observations using the monitoring tool to produce an alert result."
+        },
+        "from": "b4",
+        "relation": "consumes",
+        "to": "watchlist_condition"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Then check the stored conditions against current market observations using the monitoring tool to produce an alert result."
+        },
+        "from": "b4",
+        "relation": "consumes",
+        "to": "market_observation"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Then check the stored conditions against current market observations using the monitoring tool to produce an alert result."
+        },
+        "from": "b4",
+        "relation": "produces",
+        "to": "alert_result"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Then check the stored conditions against current market observations using the monitoring tool to produce an alert result."
+        },
+        "from": "b4",
+        "relation": "uses_tool",
+        "to": "monitoring_tool"
+      },
+      {
+        "evidence": {
+          "file": "SKILL.md",
+          "quote": "Report the alert result."
+        },
+        "from": "b5",
+        "relation": "consumes",
+        "to": "alert_result"
+      }
+    ]
+  },
+  "provenance": {
+    "description": "Manual source-supported annotations; no claim of LLM extraction accuracy",
+    "kind": "curated_demonstration",
+    "version": "showcase-1"
+  }
+}

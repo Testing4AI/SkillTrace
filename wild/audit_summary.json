@@ -1,0 +1,85 @@
+{
+  "schema": "skilltrace.public-wild-receipt.v1",
+  "recorded_run": "2026-06-29T18:07:58Z",
+  "counts": {
+    "wild_cards_all": 36926,
+    "wild_non_sentinel": 36446,
+    "profiles": 36446,
+    "profile_failures": 0,
+    "anchor50": 50,
+    "anchor_candidates": 10000,
+    "global_candidates": 204386,
+    "deduped_pairs": 214386,
+    "scored_pairs_before_root_dedup": 214386,
+    "scored_pairs": 214379,
+    "global_scored_pairs": 204386,
+    "score_failures": 0
+  },
+  "thresholds": {
+    "strict_calibrated": {
+      "repo": 0.1822,
+      "expression": 0.172237,
+      "implementation": 0.138809
+    },
+    "wild_conservative": {
+      "repo": 0.6,
+      "expression": 0.547368,
+      "implementation": 0.931034
+    }
+  },
+  "bucket_counts": [
+    {
+      "bucket": "common_full_clone_candidate",
+      "wild_conservative_count": "43581",
+      "wild_conservative_share": "0.213229",
+      "strict_calibrated_count": "148317",
+      "strict_calibrated_share": "0.725671"
+    },
+    {
+      "bucket": "low_priority",
+      "wild_conservative_count": "157336",
+      "wild_conservative_share": "0.769798",
+      "strict_calibrated_count": "8704",
+      "strict_calibrated_share": "0.042586"
+    },
+    {
+      "bucket": "repoclone_only_candidate",
+      "wild_conservative_count": "439",
+      "wild_conservative_share": "0.002148",
+      "strict_calibrated_count": "1665",
+      "strict_calibrated_share": "0.008146"
+    },
+    {
+      "bucket": "skilltrace_ei_candidate",
+      "wild_conservative_count": "163",
+      "wild_conservative_share": "0.000798",
+      "strict_calibrated_count": "394",
+      "strict_calibrated_share": "0.001928"
+    },
+    {
+      "bucket": "skilltrace_expression_only_candidate",
+      "wild_conservative_count": "1529",
+      "wild_conservative_share": "0.007481",
+      "strict_calibrated_count": "4953",
+      "strict_calibrated_share": "0.024234"
+    },
+    {
+      "bucket": "skilltrace_implementation_only_candidate",
+      "wild_conservative_count": "1338",
+      "wild_conservative_share": "0.006546",
+      "strict_calibrated_count": "40353",
+      "strict_calibrated_share": "0.197435"
+    }
+  ],
+  "receipts": [
+    {
+      "file": "audit_config.json",
+      "sha256": "0c88f3ead043d9e5adcabae63079c2d03ef9e555e06f2e236323d251ef3f7098"
+    },
+    {
+      "file": "global_exact_static_scores.jsonl",
+      "sha256": "86438c576d0d94344b7cf6fff46e6fc1a8418b49f9c8839787079b72289b32f8"
+    }
+  ],
+  "note": "Saved run summary and two selected score rows; not a full prediction release. Hash receipts identify the local records, not independent verification."
+}
