@@ -222,10 +222,7 @@ assets/              Anonymous overview figure
 
 This release provides executable method code, the ingestion prompt, inspectable
 examples, variant-generation code, wild inventory, two selected case records,
-tests, and paper-reported aggregate comparisons. **SkillTrace-Bench,
-calibration/evaluation pairs, full wild-corpus packages, full prediction files, and
-human-review records are not distributed.** Consequently, the example commands
-demonstrate the method but do not regenerate the paper's aggregate tables.
+tests, and paper-reported aggregate comparisons. **SkillTrace-Bench and full wild-corpus package are not distributed.** 
 
 The release omits paper-author identities, affiliations, private endpoints and credentials;
 public upstream skill identifiers are retained for traceability.
